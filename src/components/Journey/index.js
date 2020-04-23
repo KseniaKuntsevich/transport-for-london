@@ -1,3 +1,3 @@
-import Journey from './Journey';
+import Journey from "./Journey";
 
 export default Journey;

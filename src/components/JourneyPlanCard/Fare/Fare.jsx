@@ -2,9 +2,9 @@ import React from 'react';
 import './Fare.scss';
 
 
-const Fare = ({ amount, chargeLevel }) => (
+const Fare = ({ amount, description }) => (
   <div>
-    £ {(amount/100).toFixed(2)} {chargeLevel}
+    £ {(amount/100).toFixed(2)} {description}
   </div>
 );
 

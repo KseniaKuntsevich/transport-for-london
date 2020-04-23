@@ -5,7 +5,6 @@ import Timeline from '../../../Timeline';
 
 
 const Step = ({ data }) => { 
-  console.log(data)
   const { 
   	duration,
   	departureTime,
@@ -22,7 +21,7 @@ const Step = ({ data }) => {
       {` - `}
       {arrivalPoint.commonName}
       Stop points: 
-      {path.stopPoints.map((stopPoint) => <div key={stopPoint.id}>{stopPoint.name}</div>)}
+      {path.stopPoints.map((stopPoint, i) => <div key={i}>{stopPoint.name}</div>)}
 	</div>
 )};
 
