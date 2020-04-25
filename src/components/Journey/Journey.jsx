@@ -25,11 +25,9 @@ class Journey extends Component {
   }
 
   componentDidUpdate() {
-    const { options, prevOptions } = this
-    if (
-      JSON.stringify(options) !== JSON.stringify(prevOptions)
-    ) {
-      this.prevOptions = { ...options }
+    const { options, prevOptions } = this;
+    if (JSON.stringify(options) !== JSON.stringify(prevOptions)) {
+      this.prevOptions = { ...options };
       this.setJourneyData();
     }
   }

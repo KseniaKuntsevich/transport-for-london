@@ -8,8 +8,7 @@ import reducer from './redux/reducer';
 import './index.scss';
 
 const savedState = localStorage.getItem('appState');
-const initialState = {
-};
+const initialState = {};
 
 // const state = savedState ? { ...initialState, ...JSON.parse(savedState) } : initialState;
 
@@ -20,10 +19,7 @@ const initialState = {
 // );
 
 const rootElement = document.getElementById('root');
-ReactDOM.render(
-  <App />,
-  rootElement,
-);
+ReactDOM.render(<App />, rootElement);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
