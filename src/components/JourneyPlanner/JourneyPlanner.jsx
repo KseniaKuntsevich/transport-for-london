@@ -3,11 +3,11 @@ import Form from "../Form";
 import Select from "../Select";
 import JourneyContainer from "../../containers/JourneyContainer";
 import getStationsNames from "../../utils/getStationsNames";
-import "./Planner.scss";
+import "./JourneyPlanner.scss";
 
 import Input from "../Input";
 
-class Planner extends Component {
+class JourneyPlanner extends Component {
   constructor(props) {
     super(props);
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -49,4 +49,4 @@ class Planner extends Component {
   }
 }
 
-export default Planner;
+export default JourneyPlanner;

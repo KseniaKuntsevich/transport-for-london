@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Planner from "../components/Planner";
+import JourneyPlanner from "../components/JourneyPlanner";
 import { connect } from "react-redux";
 
 import {
@@ -22,7 +22,7 @@ const mapDispatchToProps = {
 class PlannerContainer extends Component {
   render() {
     return (
-      <Planner
+      <JourneyPlanner
         stationsNames={this.props.stationsNames}
         journeyOptions={this.props.journeyOptions}
         changePlannerJourneyOptions={this.props.changePlannerJourneyOptions}
