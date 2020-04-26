@@ -1,10 +1,10 @@
 import React from "react";
-import Planner from "../Planner";
+import PlannerContainer from "../../containers/PlannerContainer";
 import "./App.scss";
 
 const App = () => (
   <div className="app">
-    <Planner />
+    <PlannerContainer />
   </div>
 );
 

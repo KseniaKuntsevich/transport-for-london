@@ -6,27 +6,22 @@ import JourneyPlanCard from "../JourneyPlanCard";
 class Journey extends Component {
   constructor(options) {
     super(options);
-    this.options = this.props.options;
     this.prevOptions = {};
-    this.state = {
-      journeys: null,
-    };
   }
 
   setJourneyData() {
-    const { from, to, time, date } = this.options;
+    const { from, to, time, date } = this.props.options;
     if (!from || !to) {
       return;
     }
-
-    getJourney({ from, to, time, date }).then((journeys) => {
-      this.setState({ journeys: journeys });
+    getJourney({ from, to, time, date }).then((journeyData) => {
+      this.props.changeJourneyData(journeyData);
     });
   }
 
   componentDidUpdate() {
-    const { options, prevOptions } = this;
-    if (JSON.stringify(options) !== JSON.stringify(prevOptions)) {
+    const { options } = this.props;
+    if (JSON.stringify(options) !== JSON.stringify(this.prevOptions)) {
       this.prevOptions = { ...options };
       this.setJourneyData();
     }
@@ -37,11 +32,13 @@ class Journey extends Component {
   }
 
   render() {
-    const { journeys } = this.state;
+    const { journeyData } = this.props;
     return (
       <div>
-        {journeys
-          ? journeys.map((data, i) => <JourneyPlanCard data={data} key={i} />)
+        {journeyData
+          ? journeyData.map((data, i) => (
+              <JourneyPlanCard data={data} key={i} />
+            ))
           : ""}
       </div>
     );

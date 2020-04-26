@@ -8,7 +8,7 @@ const JourneyPlanCard = ({ data }) => {
   const { startDateTime, arrivalDateTime, duration, fare, legs } = data;
   return (
     <div>
-      {data.duration}
+      {duration}
       <Timeline start={startDateTime} end={arrivalDateTime} />
       {fare ? (
         <Fare amount={fare.totalCost} description={fare.fares[0].chargeLevel} />
