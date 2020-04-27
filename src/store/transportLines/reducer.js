@@ -2,20 +2,20 @@ import * as types from './actionsTypes';
 
 const defaultData = {
   stationsNames: null,
-  journeyOptions: {},
+  linesData: null,
 };
 
-export const plannerReducer = (state = defaultData, action) => {
+export const transportLinesReducer = (state = defaultData, action) => {
   switch (action.type) {
-    case types.PLANNER_CHANGE_STATIONS_NAMES:
+    case types.TRANSPOT_LINES_CHANGE_STATIONS_NAMES:
       return {
         ...state,
         stationsNames: action.payload,
       };
-    case types.PLANNER_CHANGE_JOURNEY_OPTIONS:
+    case types.TRANSPOT_LINES_CHANGE_LINES_DATA:
       return {
         ...state,
-        journeyOptions: action.payload,
+        linesData: action.payload,
       };
     default:
       return state;

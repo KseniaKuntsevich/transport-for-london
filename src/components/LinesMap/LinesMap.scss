@@ -1,0 +1,15 @@
+.mapParent {
+  position: relative;
+  overflow: hidden;
+  height: 480px;
+}
+.mapContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+
+  width: 764px;
+  height: 480px;
+}

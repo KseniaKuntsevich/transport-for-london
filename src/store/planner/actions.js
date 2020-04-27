@@ -1,7 +1,7 @@
 import * as types from './actionsTypes';
 
 export const changePlannerStationsNames = (stationsNames) => ({
-  type: types.PLANNER_CHANGE_STOP_POINT_NAMES,
+  type: types.PLANNER_CHANGE_STATIONS_NAMES,
   payload: stationsNames,
 });
 
