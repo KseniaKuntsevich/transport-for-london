@@ -1,4 +1,3 @@
-import getData from './getData';
 import getStations from './getStations';
 
 const getStationsNames = () => getStations().then((names) => {

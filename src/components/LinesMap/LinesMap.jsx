@@ -2,11 +2,7 @@ import React from "react";
 import mapboxgl from "mapbox-gl";
 import { MAPBOX_ACCESS_TOKEN } from "../../constants";
 import { LONDON_LATITUDE, LONDON_LONDITUDE } from "../../constants";
-
 import "./LinesMap.scss";
-
-const BLUE = "#33C9EB";
-const RED = "#F7455D";
 
 mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
@@ -16,12 +12,18 @@ class LinesMap extends React.Component {
     this.map = null;
     this.geojson = null;
     this.mapContainer = null;
-    this.prevLinesString = null;
+  }
+
+  componentDidMount() {
+    this.updateLines();
+  }
+  componentDidUpdate() {
+    this.updateLines();
   }
 
   updateLines() {
     const { lines } = this.props;
-    let { prevLinesString, map, geojson, mapContainer } = this;
+    let { map, geojson, mapContainer } = this;
     map = new mapboxgl.Map({
       container: mapContainer,
       style: "mapbox://styles/mapbox/streets-v11",
@@ -29,7 +31,7 @@ class LinesMap extends React.Component {
       zoom: 10,
     });
 
-    if (!lines || this.prevLinesString === JSON.stringify(lines)) {
+    if (!lines) {
       return;
     }
 
@@ -149,15 +151,6 @@ class LinesMap extends React.Component {
         },
       });
     });
-
-    this.prevLinesString = JSON.stringify(this.props.lines);
-  }
-
-  componentDidMount() {
-    this.updateLines();
-  }
-  componentDidUpdate() {
-    this.updateLines();
   }
 
   render() {

@@ -1,11 +1,7 @@
 import React from "react";
 import "./Select.scss";
 
-const Select = ({
-  name,
-  label,
-  options, // [{id, option, value}]
-}) => {
+const Select = ({ name, label, options }) => {
   return (
     <label>
       {label ? `${label}:` : ""}

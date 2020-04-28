@@ -2,7 +2,7 @@ import * as types from './actionsTypes';
 
 const defaultData = {
   stationsNames: null,
-  journeyOptions: {},
+  journeyOptions: null,
 };
 
 export const plannerReducer = (state = defaultData, action) => {

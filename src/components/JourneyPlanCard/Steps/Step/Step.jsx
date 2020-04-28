@@ -1,6 +1,6 @@
 import React from "react";
 import "./Step.scss";
-import Timeline from "../../../Timeline";
+import Timeline from "../../Timeline";
 
 const Step = ({ data }) => {
   const {

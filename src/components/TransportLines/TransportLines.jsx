@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import "./TransportLines.scss";
-import Map from "../Map";
 import LinesMap from "../LinesMap";
 import Form from "../Form";
 import Select from "../Select";
 import Input from "../Input";
 import getStationsNames from "../../utils/getStationsNames";
 import getLines from "../../utils/getLines";
-
-//import { LONDON_LATITUDE, LONDON_LONDITUDE } from "../../constants";
 
 class TransportLines extends Component {
   constructor(props) {
@@ -41,20 +38,18 @@ class TransportLines extends Component {
     return (
       <div>
         <Form callback={this.onFormSubmit}>
-          <div>
-            {stationsNames ? (
-              <div>
-                <Select
-                  label="All directions from station"
-                  name="target"
-                  options={stationsNames}
-                />
-              </div>
-            ) : (
-              ""
-            )}
-            <Input type="submit" value="Go" />
-          </div>
+          {stationsNames ? (
+            <div>
+              <Select
+                label="All directions from station"
+                name="target"
+                options={stationsNames}
+              />
+              <Input type="submit" value="Go" />
+            </div>
+          ) : (
+            ""
+          )}
         </Form>
         <LinesMap lines={linesData} />
       </div>

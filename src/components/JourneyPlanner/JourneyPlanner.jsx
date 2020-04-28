@@ -3,9 +3,9 @@ import Form from "../Form";
 import Select from "../Select";
 import JourneyContainer from "../../containers/JourneyContainer";
 import getStationsNames from "../../utils/getStationsNames";
-import "./JourneyPlanner.scss";
-
+import getJourney from "../../utils/getJourney";
 import Input from "../Input";
+import "./JourneyPlanner.scss";
 
 class JourneyPlanner extends Component {
   constructor(props) {
@@ -14,16 +14,17 @@ class JourneyPlanner extends Component {
   }
 
   componentDidMount() {
-    if (this.props.stationsNames) {
-      return;
+    if (!this.props.stationsNames) {
+      getStationsNames().then((stationsNames) => {
+        this.props.changePlannerStationsNames(stationsNames);
+      });
     }
-    getStationsNames().then((stationsNames) => {
-      this.props.changePlannerStationsNames(stationsNames);
-    });
   }
 
   onFormSubmit({ from, to, time, date }) {
-    this.props.changePlannerJourneyOptions({ from, to, time, date });
+    getJourney({ from, to, time, date }).then((journeyOptions) => {
+      this.props.changePlannerJourneyOptions(journeyOptions);
+    });
   }
 
   render() {
@@ -31,19 +32,17 @@ class JourneyPlanner extends Component {
     return (
       <div>
         <Form callback={this.onFormSubmit}>
-          <div>
-            {stationsNames ? (
-              <div>
-                <Select label="From" name="from" options={stationsNames} />
-                <Select label="To" name="to" options={stationsNames} />
-              </div>
-            ) : (
-              ""
-            )}
-            <Input type="submit" value="Get Plan" />
-          </div>
+          {stationsNames ? (
+            <div>
+              <Select label="From" name="from" options={stationsNames} />
+              <Select label="To" name="to" options={stationsNames} />
+              <Input type="submit" value="Get Plan" />
+            </div>
+          ) : (
+            ""
+          )}
         </Form>
-        <JourneyContainer options={journeyOptions} />
+        {journeyOptions ? <JourneyContainer options={journeyOptions} /> : ""}
       </div>
     );
   }

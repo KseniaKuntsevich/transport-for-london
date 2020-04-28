@@ -1,6 +1,6 @@
 import React from "react";
 import "./JourneyPlanCard.scss";
-import Timeline from "../Timeline";
+import Timeline from "./Timeline";
 import Steps from "./Steps";
 import Fare from "./Fare";
 
