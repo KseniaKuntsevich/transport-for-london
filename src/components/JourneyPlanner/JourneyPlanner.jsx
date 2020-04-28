@@ -50,7 +50,7 @@ class JourneyPlanner extends Component {
             <div>
               <Select label="From" name="from" options={stationsNames} />
               <Select label="To" name="to" options={stationsNames} />
-              <Input type="submit" value="Get Plan" />
+              <Input type="submit" value="Get a Plan" />
             </div>
           ) : (
             ""

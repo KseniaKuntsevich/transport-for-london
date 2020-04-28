@@ -9,7 +9,7 @@ const App = () => (
     <MenuContainer
       items={[
         {
-          header: "See diractions",
+          header: "Get directions",
           body: <TransportLinesContainer />,
         },
         {

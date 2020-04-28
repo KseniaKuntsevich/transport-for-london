@@ -3,6 +3,14 @@ import mapboxgl from "mapbox-gl";
 import { MAPBOX_ACCESS_TOKEN } from "../../constants";
 import { LONDON_LATITUDE, LONDON_LONDITUDE } from "../../constants";
 import "./LinesMap.scss";
+import {
+  FEATURES_LINE_GEOJSON,
+  POINT_GEOJSON,
+  POINTS_GEOJSON,
+  POINT_LAYER,
+  POINTS_LAYER,
+  LINE_STRING_LAYER,
+} from "./options";
 
 mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
@@ -10,7 +18,6 @@ class LinesMap extends React.Component {
   constructor(props) {
     super(props);
     this.map = null;
-    this.geojson = null;
     this.mapContainer = null;
   }
 
@@ -23,7 +30,7 @@ class LinesMap extends React.Component {
 
   updateLines() {
     const { lines } = this.props;
-    let { map, geojson, mapContainer } = this;
+    let { map, mapContainer } = this;
     map = new mapboxgl.Map({
       container: mapContainer,
       style: "mapbox://styles/mapbox/streets-v11",
@@ -35,121 +42,59 @@ class LinesMap extends React.Component {
       return;
     }
 
-    const featuresLine = lines.map((data, i) => ({
-      type: "Feature",
-      geometry: {
-        type: "LineString",
-        properties: {},
-        coordinates: [].concat(data.lineCoordinates),
-      },
-    }));
+    const featuresLine = lines.map((data, i) => {
+      const pattern = JSON.parse(FEATURES_LINE_GEOJSON);
+      pattern.geometry.coordinates = data.lineCoordinates;
+      return pattern;
+    });
 
     const featuresPoints = [];
     const featuresPoint = [];
+
     lines.forEach((data) => {
       const { lineCoordinates, from, to } = data;
-      featuresPoints.push({
-        type: "Feature",
-        geometry: {
-          type: "Point",
-          coordinates: lineCoordinates[0],
-        },
-        properties: {
-          title: from,
-        },
-      });
+      const patternPoints1 = JSON.parse(POINTS_GEOJSON);
+      patternPoints1.geometry.coordinates = lineCoordinates[0];
+      patternPoints1.properties.title = from;
+      featuresPoints.push(patternPoints1);
 
-      featuresPoints.push({
-        type: "Feature",
-        geometry: {
-          type: "Point",
-          coordinates: lineCoordinates[lineCoordinates.length - 1],
-        },
-        properties: {
-          title: to,
-        },
-      });
-      featuresPoint.push({
-        type: "FeatureCollection",
-        features: [
-          {
-            type: "Feature",
-            geometry: {
-              type: "Point",
-              coordinates: lineCoordinates[0],
-            },
-          },
-        ],
-      });
+      const patternPoints2 = JSON.parse(POINTS_GEOJSON);
+      patternPoints2.geometry.coordinates =
+        lineCoordinates[lineCoordinates.length - 1];
+      patternPoints2.properties.title = to;
+      featuresPoints.push(patternPoints2);
 
-      featuresPoint.push({
-        type: "FeatureCollection",
-        features: [
-          {
-            type: "Feature",
-            geometry: {
-              type: "Point",
-              coordinates: lineCoordinates[lineCoordinates - 1],
-            },
-          },
-        ],
-      });
+      const patternPoint1 = JSON.parse(POINT_GEOJSON);
+      patternPoint1.features[0].geometry.coordinates = lineCoordinates[0];
+      featuresPoint.push(patternPoint1);
+
+      const patternPoint2 = JSON.parse(POINT_GEOJSON);
+      patternPoint2.features[0].geometry.coordinates =
+        lineCoordinates[lineCoordinates.length - 1];
+      featuresPoint.push(patternPoint2);
     });
-
-    geojson = {
-      type: "FeatureCollection",
-    };
 
     map.on("load", () => {
       map.addSource("point", {
         type: "geojson",
-        data: Object.assign(geojson, { features: featuresPoints }),
+        data: { features: featuresPoints, type: "FeatureCollection" },
       });
 
-      map.addLayer({
-        id: "point",
-        type: "circle",
-        source: "point",
-        paint: {
-          "circle-radius": 6,
-          "circle-color": "#3887be",
-        },
-      });
       map.addSource("LineString", {
         type: "geojson",
-        data: Object.assign(geojson, { features: featuresLine }),
+        data: { features: featuresLine, type: "FeatureCollection" },
       });
 
       map.addSource("points", {
         type: "geojson",
-        data: Object.assign(geojson, { features: featuresPoints }),
+        data: { features: featuresPoints, type: "FeatureCollection" },
       });
 
-      map.addLayer({
-        id: "LineString",
-        type: "line",
-        source: "LineString",
-        layout: {
-          "line-join": "round",
-          "line-cap": "round",
-        },
-        paint: {
-          "line-color": "#3b9194",
-          "line-width": 3,
-        },
-      });
+      map.addLayer(POINT_LAYER);
 
-      map.addLayer({
-        id: "points",
-        type: "symbol",
-        source: "points",
-        layout: {
-          "text-field": ["get", "title"],
-          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-          "text-offset": [0, 0.6],
-          "text-anchor": "top",
-        },
-      });
+      map.addLayer(LINE_STRING_LAYER);
+
+      map.addLayer(POINTS_LAYER);
     });
   }
 
