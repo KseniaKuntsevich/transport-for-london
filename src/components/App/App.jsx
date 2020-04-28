@@ -1,12 +1,23 @@
 import React from "react";
 import TransportLinesContainer from "../../containers/TransportLinesContainer";
 import JourneyPlannerContainer from "../../containers/JourneyPlannerContainer";
+import MenuContainer from "../../containers/MenuContainer";
 import "./App.scss";
 
 const App = () => (
   <div className="app">
-    <TransportLinesContainer />
-    <JourneyPlannerContainer />
+    <MenuContainer
+      items={[
+        {
+          header: "See diractions",
+          body: <TransportLinesContainer />,
+        },
+        {
+          header: "Plan Journey",
+          body: <JourneyPlannerContainer />,
+        },
+      ]}
+    />
   </div>
 );
 
