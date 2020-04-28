@@ -6,6 +6,7 @@ const Input = ({ onChange, type, name, value, label, list }) => {
     <label>
       {label ? `${label}:` : ""}
       <input
+        className="input"
         type={type}
         value={value}
         name={name}

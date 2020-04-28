@@ -5,7 +5,7 @@ let options = { hour: "numeric", minute: "numeric" };
 const Timeline = (
   { start, end } // Date time
 ) => (
-  <div>
+  <div className="timeline">
     {new Date(start).toLocaleString("en-GB", options)}
     {` - `}
     {new Date(end).toLocaleString("en-GB", options)}

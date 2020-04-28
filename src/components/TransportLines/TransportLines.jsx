@@ -51,7 +51,9 @@ class TransportLines extends Component {
             ""
           )}
         </Form>
-        <LinesMap lines={linesData} />
+        <div className="lines-map-container">
+          <LinesMap lines={linesData} />
+        </div>
       </div>
     );
   }

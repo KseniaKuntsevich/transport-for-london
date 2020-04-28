@@ -1,0 +1,19 @@
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  margin: 20px 0 20px 0;
+  cursor: pointer;
+  display: block;
+  min-height: 30px;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+  background-color: #164b79;
+  outline: none;
+
+  &:hover {
+    background-color: #267eca;
+  }
+}

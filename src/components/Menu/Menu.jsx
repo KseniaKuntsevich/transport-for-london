@@ -12,7 +12,7 @@ class Menu extends Component {
   render() {
     return (
       <div>
-        <ul>
+        <ul className="navbar">
           {this.props.items.map((item, index) => {
             return (
               <li

@@ -12,16 +12,24 @@ const Step = ({ data }) => {
     path,
   } = data;
   return (
-    <div>
-      {duration} min
-      <Timeline start={departureTime} end={arrivalTime} />
-      {departurePoint.commonName}
-      {` - `}
-      {arrivalPoint.commonName}
-      Stop points:
-      {path.stopPoints.map((stopPoint, i) => (
-        <div key={i}>{stopPoint.name}</div>
-      ))}
+    <div className="step">
+      <div className="step-header">
+        {duration} min
+        <Timeline start={departureTime} end={arrivalTime} />
+      </div>
+      <div className="title">
+        {departurePoint.commonName}
+        {` - `}
+        {arrivalPoint.commonName}
+      </div>
+      <div className="body">
+        Stop points:
+        <ul className="list">
+          {path.stopPoints.map((stopPoint, i) => (
+            <li key={i}>{stopPoint.name}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

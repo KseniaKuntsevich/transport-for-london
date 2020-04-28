@@ -3,7 +3,7 @@ import "./Journey.scss";
 import JourneyPlanCard from "../JourneyPlanCard";
 
 const Journey = ({ options }) => (
-  <div>
+  <div className="journey">
     {options.map((data, i) => (
       <JourneyPlanCard key={i} data={data} />
     ))}

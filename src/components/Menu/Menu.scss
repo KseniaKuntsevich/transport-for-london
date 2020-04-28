@@ -1,0 +1,18 @@
+.navbar {
+  list-style: none;
+  padding: 0;
+}
+
+.vertical-navbar {
+  font-size: 1.1em;
+  cursor: pointer;
+  padding-bottom: 5px;
+
+  &.active {
+    color: #164b79;
+  }
+
+  &:hover {
+    color: #267eca;
+  }
+}
