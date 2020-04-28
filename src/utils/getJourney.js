@@ -20,7 +20,7 @@ const getJourney = ({
   const api = `&app_key=${TRANSPORT_FOR_LONDON_API_KEY}&app_id=${TRANSPORT_FOR_LONDON_ID}`;
   const url = journeyURL + coords + dateTime + api;
 
-  return getData(url).then((data) => data.journeys);
+  return getData(url).then((data) => (data ? data.journeys : []));
 };
 
 export default getJourney;

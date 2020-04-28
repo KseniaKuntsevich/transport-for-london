@@ -13,7 +13,7 @@ const App = () => (
           body: <TransportLinesContainer />,
         },
         {
-          header: "Plan Journey",
+          header: "Plan a Journey",
           body: <JourneyPlannerContainer />,
         },
       ]}

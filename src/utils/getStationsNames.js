@@ -1,11 +1,11 @@
 import getStations from './getStations';
 
-const getStationsNames = () => getStations().then((names) => {
+const getStationsNames = () => getStations().then((stations) => {
   // delete repeating values
   const stationNames = {};
   const result = [];
 
-  names.forEach((descrip) => {
+  stations.forEach((descrip) => {
     if (!stationNames[descrip.atcoCode]) {
       stationNames[descrip.atcoCode] = true;
       result.push({

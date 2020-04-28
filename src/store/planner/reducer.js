@@ -3,6 +3,7 @@ import * as types from './actionsTypes';
 const defaultData = {
   stationsNames: null,
   journeyOptions: null,
+  isLoading: false,
 };
 
 export const plannerReducer = (state = defaultData, action) => {
@@ -17,6 +18,12 @@ export const plannerReducer = (state = defaultData, action) => {
         ...state,
         journeyOptions: action.payload,
       };
+    case types.PLANNER_CHANGE_IS_LOADING:
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
+
     default:
       return state;
   }

@@ -15,12 +15,11 @@ class TransportLines extends Component {
   }
 
   componentDidMount() {
-    if (this.props.stationsNames) {
-      return;
+    if (!this.props.stationsNames) {
+      getStationsNames().then((stationsNames) => {
+        this.props.changeTransportLinesStationsNames(stationsNames);
+      });
     }
-    getStationsNames().then((stationsNames) => {
-      this.props.changeTransportLinesStationsNames(stationsNames);
-    });
   }
 
   onFormSubmit({ target }) {
@@ -28,7 +27,6 @@ class TransportLines extends Component {
       getLines(target).then((data) => {
         this.props.changeTransportLinesData(data);
       });
-
       this.prevTarget = target;
     }
   }
@@ -41,7 +39,7 @@ class TransportLines extends Component {
           {stationsNames ? (
             <div>
               <Select
-                label="All directions from station"
+                label="All directions from the station"
                 name="target"
                 options={stationsNames}
               />
@@ -60,5 +58,3 @@ class TransportLines extends Component {
 }
 
 export default TransportLines;
-
-// <Map lat={LONDON_LATITUDE} lng={LONDON_LONDITUDE} zoom={10} />
